@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class SpawnManager : MonoBehaviour
@@ -11,14 +13,15 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject _playerPrefab;
     [SerializeField] private ThresholdController _thresholdController;
     [SerializeField] private Button _respawnButton;
+    [SerializeField] private SinglePlayerUIManager singlePlayerUIManager;
     
     void Start()
     {
+        _respawnButton.onClick.AddListener(MoveToSpawnPoint);
         _player = Instantiate(_playerPrefab, _spawnPoint.position, _spawnPoint.rotation);
         _hips = _player.transform.GetChild(1).transform.GetChild(0);
         MoveToSpawnPoint();
         _thresholdController.OnFall.AddListener(MoveToSpawnPoint);
-        _respawnButton.onClick.AddListener(MoveToSpawnPoint);
     }
     
     void Update()

@@ -1,93 +1,79 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
-using TMPro;
-using UI;
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
 using Newtonsoft.Json;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
-public class LeaderBoardManager : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private TMP_InputField _saveRecordInputField;
-    [SerializeField] private TMP_Text _warningText;
-    [SerializeField] private Button _submitButton;
-    [SerializeField] private Button _testButton;
-    [SerializeField] private TMP_Text _highScoreText;
-    [SerializeField] private UIManager _uiManager;
-    [SerializeField] private GameManager _gameManager;
+    public class LeaderBoardManager : MonoBehaviour
+    {
+        [SerializeField] private TMP_InputField _saveRecordInputField;
+        [SerializeField] private TMP_Text _warningText;
+        [SerializeField] private Button _submitButton;
+        [SerializeField] private TMP_Text _highScoreText;
+        [SerializeField] private SinglePlayerUIManager singlePlayerUIManager;
+        [SerializeField] private GameManager _gameManager;
+        
 
-    private void Start()
-    {
-        _testButton.onClick.AddListener(GetLeaderBoard);
-        _gameManager.OnGameOver.AddListener(GameOver);
-        _submitButton.onClick.AddListener(SubmitScore);
-    }
-    
-    private void SubmitScore()
-    {
-        if (string.IsNullOrEmpty(_saveRecordInputField.text))
+        private void Start()
         {
-            _warningText.text = "Nickname cannot be empty";
+            _gameManager.OnGameOver.AddListener(GameOver);
+            _submitButton.onClick.AddListener(SubmitScore);
         }
-        else
+    
+        private void SubmitScore()
         {
-            var leaderboard = PlayerPrefs.GetString("LeaderBoard");
-            if (!string.IsNullOrEmpty(leaderboard))
+            if (string.IsNullOrEmpty(_saveRecordInputField.text))
             {
-                
-                
-                
-                List<LeaderBoard> leaderBoards = JsonConvert.DeserializeObject<List<LeaderBoard>>(leaderboard);
-                leaderBoards.Add(new LeaderBoard(_saveRecordInputField.text, DateTime.ParseExact(_uiManager.TimerText.text, "HH:mm:ss.FFF",
-                    CultureInfo.InvariantCulture)));
+                _warningText.text = "Nickname cannot be empty";
             }
             else
             {
-                
-                List<LeaderBoard> leaderBoards = new List<LeaderBoard>()
+                var leaderboard = PlayerPrefs.GetString("LeaderBoard");
+                if (string.IsNullOrEmpty(leaderboard))
                 {
-                    new(_saveRecordInputField.text, DateTime.ParseExact(_uiManager.TimerText.text, "HH:mm:ss.FFF",
-                        CultureInfo.InvariantCulture))
+                    List<LeaderBoard> leaderBoards = new List<LeaderBoard>()
+                    {
+                        new(_saveRecordInputField.text, TimeSpan.FromSeconds(singlePlayerUIManager.Timer))
+                    };
 
-                };
+                    var leaderBoardsString = JsonConvert.SerializeObject(leaderBoards);
+                    PlayerPrefs.SetString("LeaderBoard", leaderBoardsString);
+                }
+                else
+                {
+                    List<LeaderBoard> leaderBoards = JsonConvert.DeserializeObject<List<LeaderBoard>>(leaderboard);
+                    leaderBoards.Add(new LeaderBoard(_saveRecordInputField.text, TimeSpan.FromSeconds(singlePlayerUIManager.Timer)));
+                    leaderBoards.Sort((x, y) => TimeSpan.Compare(x.Time, y.Time));
+                
+                    var leaderBoardsString = JsonConvert.SerializeObject(leaderBoards);
+                    PlayerPrefs.SetString("LeaderBoard", leaderBoardsString);
+                }
+                PlayerPrefs.Save();
 
-                var leaderBoardsString = JsonConvert.SerializeObject(leaderBoards);
-                PlayerPrefs.SetString("LeaderBoard", leaderBoardsString);
+                _submitButton.enabled = false;
+                _warningText.text = "Record is successfully saved.";
             }
-            PlayerPrefs.Save();
+        }
+
+        private void GameOver()
+        {
+            _highScoreText.text = "Score: " + singlePlayerUIManager.TimerText.text;
         }
     }
 
-    private void GetLeaderBoard()
+    public class LeaderBoard
     {
-        var leaderboard = PlayerPrefs.GetString("LeaderBoard");
-        var leadBoard = JsonConvert.DeserializeObject<List<LeaderBoard>>(leaderboard);
-        
-        leadBoard.Sort((x, y) => DateTime.Compare(x.Time, y.Time));
-        
-        
-        Debug.Log("end");
-        
-        
-    }
+        public string NickName;
+        public TimeSpan Time;
 
-    private void GameOver()
-    {
-        _highScoreText.text = "Score: " + _uiManager.TimerText.text;
-    }
-}
-
-public class LeaderBoard
-{
-    public string NickName;
-    public DateTime Time;
-
-    public LeaderBoard(string nickName, DateTime time)
-    {
-        NickName = nickName;
-        Time = time;
+        public LeaderBoard(string nickName, TimeSpan time)
+        {
+            NickName = nickName;
+            Time = time;
+        }
     }
 }

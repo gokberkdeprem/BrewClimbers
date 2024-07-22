@@ -1,10 +1,12 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
 {
-    public class UIManager : MonoBehaviour
+    public class SinglePlayerUIManager : MonoBehaviour
     {
         [SerializeField] private GameManager _gameManager;
         [SerializeField] private GameObject _leaderboardUserInputPanel;
@@ -15,15 +17,23 @@ namespace UI
     
         // Gameplay Canvas
         [SerializeField] private Button _pauseButton;
+        [SerializeField] private Button _respawnButton;
     
         // Pause Menu Canvas
         [SerializeField] private GameObject _pauseMenuCanvas;
         [SerializeField] private Button _continueButton;
+        [SerializeField] private Button _pauseMenuRestartButton;
+        [SerializeField] private Button _pauseMainMenuButton;
+        [SerializeField] private Button _hiddenCloseButton;
     
         // End Game Menu Canvas
         [SerializeField] private GameObject _endMenuCanvas;
         [SerializeField] private Button _saveScoreButton;
-        [SerializeField] private Button _closeSaveScoreInputPanel;
+        [SerializeField] private Button _closeSaveScorePanel;
+        [SerializeField] private Button _hiddenCloseSaveScorePanel;
+        [SerializeField] private TMP_Text _endGameScoreText;
+        [SerializeField] private Button _endMenuRestartButton;
+        [SerializeField] private Button _endMenuMainMenuButton;
     
         private void Start()
         {
@@ -37,16 +47,24 @@ namespace UI
         
             // Pause Menu Canvas
             _continueButton.onClick.AddListener(TogglePauseMenu);
+            _pauseMenuRestartButton.onClick.AddListener(LoadSinglePlayer);
+            _pauseMainMenuButton.onClick.AddListener(LoadMainMenu);
+            _hiddenCloseButton.onClick.AddListener(TogglePauseMenu);
         
             // End Game Menu Canvas
-            _saveScoreButton.onClick.AddListener(ToggleSaveLeaderBoardPanel);
-            _closeSaveScoreInputPanel.onClick.AddListener(ToggleSaveLeaderBoardPanel);
+            _saveScoreButton.onClick.AddListener(ToggleSaveScorePanel);
+            _closeSaveScorePanel.onClick.AddListener(ToggleSaveScorePanel);
+            _hiddenCloseSaveScorePanel.onClick.AddListener(ToggleSaveScorePanel);
+            
+            _endMenuRestartButton.onClick.AddListener(LoadSinglePlayer);
+            _endMenuMainMenuButton.onClick.AddListener(LoadMainMenu);
         
-            // Set unused canvas disabled
+            // Set canvas disabled on the start
             _pauseMenuCanvas.SetActive(false);
             _endMenuCanvas.SetActive(false);
         }
-    
+
+
         void Update () {
 
             if(!_gameManager.IsGameOver){
@@ -66,7 +84,7 @@ namespace UI
                 _pauseMenuCanvas.SetActive(true);
         }
 
-        void ToggleSaveLeaderBoardPanel()
+        void ToggleSaveScorePanel()
         {
             if (_leaderboardUserInputPanel.activeInHierarchy)
                 _leaderboardUserInputPanel.SetActive(false);
@@ -77,6 +95,17 @@ namespace UI
         void GameOver()
         {
             _endMenuCanvas.SetActive(true);
+            _endGameScoreText.text = TimerText.text;
+        }
+        
+        private void LoadMainMenu()
+        {
+            SceneManager.LoadScene(0);
+        }
+        
+        private void LoadSinglePlayer()
+        {
+            SceneManager.LoadScene(1);
         }
     
     }
