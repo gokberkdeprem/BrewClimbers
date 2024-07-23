@@ -876,7 +876,7 @@ MonoBehaviour:
   _hipsRb: {fileID: 3587574849185055730}
   _force: 1000
   _virtualCamera: {fileID: 0}
-  _jumpCoolDownDuration: 1
+  _jumpCoolDownDuration: 2
   _tapLimit: 3
   _playerController: {fileID: 5187602417463193851}
   rigidbodies: []
