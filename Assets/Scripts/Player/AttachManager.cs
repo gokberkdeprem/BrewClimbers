@@ -11,13 +11,6 @@ public class AttachManager : MonoBehaviour
     [SerializeField] private Rigidbody _handRb;
     public bool _isAttached;
     private bool _canAttach = true;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-        
-    }
 
     // Update is called once per frame
     void Update()

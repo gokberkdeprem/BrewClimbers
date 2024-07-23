@@ -868,11 +868,18 @@ MonoBehaviour:
   OnTouch:
     m_PersistentCalls:
       m_Calls: []
+  OnTapCountChange:
+    m_PersistentCalls:
+      m_Calls: []
   _rightHandRb: {fileID: 9083214988022688871}
   _leftHandRb: {fileID: 2055381236930103276}
   _hipsRb: {fileID: 3587574849185055730}
   _force: 1000
   _virtualCamera: {fileID: 0}
+  _jumpCoolDownDuration: 1
+  _tapLimit: 3
+  _playerController: {fileID: 5187602417463193851}
+  rigidbodies: []
 --- !u!1 &2980571888160536740
 GameObject:
   m_ObjectHideFlags: 0

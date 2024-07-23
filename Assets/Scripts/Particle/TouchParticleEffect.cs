@@ -12,15 +12,9 @@ namespace Particle
         // Start is called before the first frame update
         void Start()
         {
-            StartCoroutine(LateStart());
+            GameManager.Instance.OnPlayerInstantiated.AddListener(AssignParticle);
         }
-
-        // Update is called once per frame
-        void Update()
-        {
         
-        }
-
         void InstantiateParticle(Transform targetTransform)
         {
             Vector3 targetPos = new Vector3(targetTransform.position.x, targetTransform.position.y + _offsetY,
@@ -28,12 +22,10 @@ namespace Particle
             Instantiate(_touchParticle, targetPos, _touchParticle.transform.rotation);
         }
 
-        IEnumerator LateStart()
+        private void AssignParticle()
         {
-            yield return new WaitForSeconds(1);
-            _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            _playerController = GameManager.Instance.PlayerController;
             _playerController.OnTouch.AddListener(InstantiateParticle);
         }
-        
     }
 }

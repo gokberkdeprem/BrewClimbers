@@ -6,6 +6,8 @@ TagManager:
   tags:
   - GameManager
   - VirtualCamera
+  - SinglePlayerUIManager
+  - TapCountCanvas
   layers:
   - Default
   - TransparentFX

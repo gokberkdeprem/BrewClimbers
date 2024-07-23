@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using TMPro;
@@ -13,6 +14,7 @@ namespace UI
         [SerializeField] private TMP_InputField _saveRecordInputField;
         [SerializeField] private TMP_Text _warningText;
         [SerializeField] private Button _submitButton;
+        [SerializeField] private Image _submitButtonImage;
         [SerializeField] private TMP_Text _highScoreText;
         [SerializeField] private SinglePlayerUIManager singlePlayerUIManager;
         [SerializeField] private GameManager _gameManager;
@@ -29,6 +31,7 @@ namespace UI
             if (string.IsNullOrEmpty(_saveRecordInputField.text))
             {
                 _warningText.text = "Nickname cannot be empty";
+                StartCoroutine(ChangeSubmitButtonColor());
             }
             else
             {
@@ -54,6 +57,7 @@ namespace UI
                 }
                 PlayerPrefs.Save();
 
+                _submitButtonImage.color = Color.green;
                 _submitButton.enabled = false;
                 _warningText.text = "Record is successfully saved.";
             }
@@ -63,7 +67,19 @@ namespace UI
         {
             _highScoreText.text = "Score: " + singlePlayerUIManager.TimerText.text;
         }
+        
+        
+        private IEnumerator ChangeSubmitButtonColor()
+        {
+            var temp = _submitButton.image.color;
+            _submitButtonImage.color = Color.red;
+            yield return new WaitForSeconds(1);
+            _submitButtonImage.color = temp;
+
+        }
     }
+    
+    
 
     public class LeaderBoard
     {

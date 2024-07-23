@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -34,6 +35,9 @@ namespace UI
         [SerializeField] private TMP_Text _endGameScoreText;
         [SerializeField] private Button _endMenuRestartButton;
         [SerializeField] private Button _endMenuMainMenuButton;
+        
+        // TabCountCanvas
+        [SerializeField] private TMP_Text _tabCountText;
     
         private void Start()
         {
@@ -54,16 +58,38 @@ namespace UI
             // End Game Menu Canvas
             _saveScoreButton.onClick.AddListener(ToggleSaveScorePanel);
             _closeSaveScorePanel.onClick.AddListener(ToggleSaveScorePanel);
-            _hiddenCloseSaveScorePanel.onClick.AddListener(ToggleSaveScorePanel);
-            
+            // _hiddenCloseSaveScorePanel.onClick.AddListener(ToggleSaveScorePanel);
             _endMenuRestartButton.onClick.AddListener(LoadSinglePlayer);
             _endMenuMainMenuButton.onClick.AddListener(LoadMainMenu);
         
             // Set canvas disabled on the start
             _pauseMenuCanvas.SetActive(false);
             _endMenuCanvas.SetActive(false);
+            
+            // Tap Count Canvas
+            GameManager.Instance.OnPlayerInstantiated.AddListener(AddListenerForTabCount);
         }
 
+        private void AddListenerForTabCount()
+        {
+            UpdateTabCount(GameManager.Instance.PlayerController.RemainingTap, true);
+            GameManager.Instance.PlayerController.OnTapCountChange.AddListener(UpdateTabCount);
+        }
+
+        private void UpdateTabCount(int remainingTab, bool isRefreshed)
+        {
+            if (isRefreshed)
+                StartCoroutine(ChangeRemainingTapTextColor());
+                    
+            _tabCountText.text = $"Remaining Taps: {remainingTab}";
+        }
+
+        private IEnumerator ChangeRemainingTapTextColor()
+        {
+            _tabCountText.color = Color.green;
+            yield return new WaitForSeconds(0.5f);
+            _tabCountText.color = Color.white;
+        }
 
         void Update () {
 
