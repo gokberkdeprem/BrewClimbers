@@ -15,6 +15,8 @@ namespace UI
         [SerializeField] private GameObject _leaderboardObject;
         [SerializeField] private GameObject _titleRibbon;
         [SerializeField] private GameObject _titleRibbonContainer;
+        private bool isPopulated;
+        
         
         void Start()
         {
@@ -24,6 +26,9 @@ namespace UI
         }
         private void ListLeaderBoard()
         {
+            if(isPopulated)
+                return;
+            
             var leaderboardString = PlayerPrefs.GetString("LeaderBoard");
 
             if (string.IsNullOrEmpty(leaderboardString))
@@ -46,7 +51,9 @@ namespace UI
                     var item = Instantiate(_titleRibbon, _titleRibbonContainer.transform, false);
                     item.GetComponentInChildren<TMP_Text>().text =
                         $"{i + 1}. {leaderboard[i].NickName} {leaderboard[i].Time}";
-                } 
+                }
+
+                isPopulated = true;
             }
         }
         
