@@ -6,50 +6,117 @@ using Cinemachine;
 using Layer;
 using TMPro;
 using UI;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
     public UnityEvent<Transform> OnTouch;
-    public UnityEvent<int, bool> OnTapCountChange;
+    public UnityEvent<float> OnStaminaChanged;
     [SerializeField] private Rigidbody _rightHandRb;
     [SerializeField] private Rigidbody _leftHandRb;
     [SerializeField] private Rigidbody _hipsRb;
     [SerializeField] private float _force;
     [SerializeField] private CinemachineVirtualCamera _virtualCamera;
-    [SerializeField] private float _jumpCoolDownDuration;
-    [SerializeField] private int _tapLimit;
+    [SerializeField] private int _staminaLimit;
     [SerializeField] private PlayerController _playerController;
-    
-    private int _remainingTap;
-    private GameManager _gameManager;
-    private bool _canJump = true;
+    [SerializeField] private bool _isAttached;
+    [SerializeField] private bool _canAttach;
 
-    public int RemainingTap => _remainingTap;
+    [SerializeField] private AttachManager _rightHandAttMan;
+    [SerializeField] private AttachManager _leftHandAttMan;
+    
+    
+    [SerializeField] private float _stamina;
+    [SerializeField] private float _staminaFillRate;
+    private GameManager _gameManager;
+    private bool isFilling;
+    private GameObject _tappedObject;
+
+    // public int RemainingTap => _remainingTap;
+    public float Stamina
+    {
+        get => _stamina;
+        private set
+        {
+            _stamina = value;
+
+            if (_stamina < 0 || _stamina > _staminaLimit)
+            {
+                if (_stamina > _staminaLimit)
+                {
+                    _stamina = _staminaLimit;
+                }
+                else if (_stamina < 0)
+                {
+                    _stamina = 0;
+                }
+            }
+        }
+    }
+
+    private bool CanJump => Stamina >= 1;
+
 
     [SerializeField] private Rigidbody[] rigidbodies;
-    [ContextMenu("Set Rigidbodies")]
-    void SetRigidBodies()
-    {
-        rigidbodies = GetComponentsInChildren<Rigidbody>();
-    }
+    // [ContextMenu("Set Rigidbodies")]
+    // void SetRigidBodies()
+    // {
+    //     rigidbodies = GetComponentsInChildren<Rigidbody>();
+    // }
+    
     
     void Start()
     {
         _gameManager = GameManager.Instance;
         _virtualCamera = GameManager.Instance.VirtualCamera;
-        _remainingTap = _tapLimit;
+        _stamina = _staminaLimit;
         AssignCamera();
         _gameManager.OnGameOver.AddListener(GameOver);
         _gameManager.PlayerController = _playerController;
+        StartCoroutine(CheckAttachStatus());
+        _gameManager.SpawnManager.OnRespawn.AddListener(OnRespawn);
     }
-    
+
+    private void OnRespawn()
+    {
+        Stamina = _staminaLimit;
+    }
+
+    private IEnumerator CheckAttachStatus()
+    {
+        while (!_gameManager.IsGameOver)
+        {
+            yield return new WaitForSeconds(1f);
+            
+            if (_isAttached && !isFilling)
+            {
+                StartCoroutine(FillStamina());
+            }
+        }
+    }
+
+    private IEnumerator FillStamina()
+    {
+        isFilling = true;
+        while (_isAttached && Stamina < 3 && _staminaFillRate > 0)
+        {
+            yield return new WaitForSeconds(0.01f);
+            Stamina += _staminaFillRate;
+        }
+        isFilling = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.touchCount > 0 && !_gameManager.IsGameOver && _canJump)
+        _isAttached = _leftHandAttMan._isAttached || _rightHandAttMan._isAttached;
+        _canAttach = _leftHandAttMan._canAttach && _rightHandAttMan._canAttach;
+        
+        if (Input.touchCount > 0 && !_gameManager.IsGameOver && CanJump)
         {
             Touch touch = Input.GetTouch(0);
             
@@ -62,34 +129,42 @@ public class PlayerController : MonoBehaviour
                 {
                     var colliderGameObject = hit.collider.gameObject;
                     
-                    if (colliderGameObject.layer == LayerHelper.GetLayer(Layers.Brick))
+                    if (colliderGameObject.layer == LayerHelper.GetLayer(Layers.Brick) && colliderGameObject != _tappedObject)
                     {
+                        _tappedObject = colliderGameObject;
+                        
                         OnTouch.Invoke(colliderGameObject.transform);
                         Vector3 target = hit.collider.gameObject.transform.position;
                         var activeHand = target.x > transform.position.x ? _rightHandRb : _leftHandRb;
+                        _rightHandRb.isKinematic = false;
+                        _leftHandRb.isKinematic = false;
+                        
                         Vector3 targetDirection = (target - activeHand.transform.position).normalized;
                         activeHand.AddForce(targetDirection * _force, ForceMode.Impulse);
                         
-                        _remainingTap -= 1;
-                        OnTapCountChange.Invoke(_remainingTap, false);
-                        if (_remainingTap <= 0)
-                        {
-                            StartCoroutine(JumpCoolDown());
-                        }
+                        Stamina -= 1;
                     }
+
+                    StartCoroutine(RemoveTappedObject());
+
                 }
             }
         }
     }
 
-    private IEnumerator JumpCoolDown()
+    private IEnumerator RemoveTappedObject()
     {
-        _canJump = false;
-        yield return new WaitForSeconds(_jumpCoolDownDuration);
-        _canJump = true;
-        _remainingTap = _tapLimit;
-        OnTapCountChange.Invoke(_remainingTap, true);
+        // To prevent the double tap
+        yield return new WaitForSeconds(1f);
+        _tappedObject = null;
     }
+
+    // private IEnumerator JumpCoolDown()
+    // {
+    //     yield return new WaitForSeconds(_jumpCoolDownDuration);
+    //     OnTapCountChange.Invoke(3, true);
+    //     _remainingTap = _tapLimit;
+    // }
 
     private void AssignCamera()
     {

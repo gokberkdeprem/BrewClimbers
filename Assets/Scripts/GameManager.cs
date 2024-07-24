@@ -14,17 +14,9 @@ public class GameManager : MonoBehaviour
     public CinemachineVirtualCamera VirtualCamera;
     [SerializeField] private FinishLineController _finishLineController;
     private PlayerController _playerController;
-
-    public PlayerController PlayerController
-    {
-        get => _playerController;
-        set
-        {
-            _playerController = value;
-            OnPlayerInstantiated.Invoke();
-        }
-    }
-
+    public SpawnManager SpawnManager;
+    public GameObject CameraPlane;
+    
     private static GameManager _instance;
     public static GameManager Instance
     {
@@ -44,7 +36,8 @@ public class GameManager : MonoBehaviour
             return _instance;
         }
     }
-
+    
+    
     private void Awake()
     {
         if (_instance == null)
@@ -63,7 +56,17 @@ public class GameManager : MonoBehaviour
         IsGameOver = false;
         _finishLineController.OnFinish.AddListener(GameOver);
     }
-
+    
+    public PlayerController PlayerController
+    {
+        get => _playerController;
+        set
+        {
+            _playerController = value;
+            OnPlayerInstantiated.Invoke();
+        }
+    }
+    
     void GameOver()
     {
         IsGameOver = true;

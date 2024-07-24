@@ -67,13 +67,13 @@ namespace UI
             _endMenuCanvas.SetActive(false);
             
             // Tap Count Canvas
-            GameManager.Instance.OnPlayerInstantiated.AddListener(AddListenerForTabCount);
+            // GameManager.Instance.OnPlayerInstantiated.AddListener(AddListenerForTabCount);
         }
 
         private void AddListenerForTabCount()
         {
-            UpdateTabCount(GameManager.Instance.PlayerController.RemainingTap, true);
-            GameManager.Instance.PlayerController.OnTapCountChange.AddListener(UpdateTabCount);
+            // UpdateTabCount(GameManager.Instance.PlayerController.RemainingTap, true);
+            // GameManager.Instance.PlayerController.OnTapCountChange.AddListener(UpdateTabCount);
         }
 
         private void UpdateTabCount(int remainingTab, bool isRefreshed)

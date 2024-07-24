@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UI;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -14,6 +15,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private ThresholdController _thresholdController;
     [SerializeField] private Button _respawnButton;
     [SerializeField] private SinglePlayerUIManager singlePlayerUIManager;
+    public UnityEvent OnRespawn;
     
     void Start()
     {
@@ -35,6 +37,7 @@ public class SpawnManager : MonoBehaviour
     private void MoveToSpawnPoint()
     {
         _hips.transform.position = _spawnPoint.position;
+        OnRespawn.Invoke();
     }
     
 }
