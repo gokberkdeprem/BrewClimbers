@@ -6,6 +6,7 @@ using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
+using Object = System.Object;
 
 public class AttachManager : MonoBehaviour
 {
@@ -14,19 +15,22 @@ public class AttachManager : MonoBehaviour
     [SerializeField] public UnityEvent OnAttachStatusChanged;
     public bool _isAttached;
     public bool _canAttach = true;
-    [SerializeField] private GameObject _greenOrbParticle;
+    [SerializeField] private GameObject _circleIndicator;
     private bool isCanAttachStatusChanging;
+    public GameObject AttachedObject;
+     public UnityEvent<bool> OnHitTarget;
+    [SerializeField] private PlayerController _playerController;
 
     private void Start()
     {
-        _greenOrbParticle.SetActive(true);
+        _circleIndicator.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        _greenOrbParticle.transform.position =
-            new Vector3(_handCollider.transform.position.x, _handCollider.transform.position.y, _greenOrbParticle.transform.position.z);
+        _circleIndicator.transform.position =
+            new Vector3(_handCollider.transform.position.x, _handCollider.transform.position.y, _circleIndicator.transform.position.z);
         
         
         if (Input.touchCount > 0)
@@ -48,6 +52,20 @@ public class AttachManager : MonoBehaviour
     {
         if (other.gameObject.layer == LayerHelper.GetLayer(Layers.Brick) && _canAttach)
         {
+            if (_playerController?.TargetObject != null)
+            {
+                var name = gameObject.name;
+
+                var first = other.gameObject;
+                var second = _playerController.TargetObject;
+
+                var x = ReferenceEquals(first, second);
+                
+                OnHitTarget.Invoke(x);
+                // _playerController.TargetObject = null;
+            }
+            
+            AttachedObject = other.gameObject;
             _handRb.isKinematic = true;
             _isAttached = true;
             OnAttachStatusChanged.Invoke();
@@ -58,6 +76,7 @@ public class AttachManager : MonoBehaviour
     {
         if (other.gameObject.layer == LayerHelper.GetLayer(Layers.Brick))
         {
+            AttachedObject = null;
             _handRb.isKinematic = false;
             _isAttached = false;
             OnAttachStatusChanged.Invoke();
@@ -79,9 +98,6 @@ public class AttachManager : MonoBehaviour
 
     private void ToggleOrb()
     {
-        _greenOrbParticle.SetActive(!_greenOrbParticle.activeInHierarchy);
+        _circleIndicator.SetActive(!_circleIndicator.activeInHierarchy);
     }
-    
-    
-    
 }

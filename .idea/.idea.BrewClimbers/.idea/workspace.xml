@@ -6,34 +6,23 @@
   <component name="ChangeListManager">
     <list default="true" id="3a6e647a-c07b-4b55-b194-7c87be71e7a0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BrewClimbers/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BrewClimbers/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Epic Toon FX/Materials/Basics/glow1_AB.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Epic Toon FX/Materials/Basics/glow1_AB.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Epic Toon FX/Materials/Misc/Lightning/lightning_spritesheet_3x3_ADD.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Epic Toon FX/Materials/Misc/Lightning/lightning_spritesheet_3x3_ADD.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Epic Toon FX/Prefabs/Interactive/Portals/SimplePortal/SimplePortalGreen.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Epic Toon FX/Prefabs/Interactive/Portals/SimplePortal/SimplePortalGreen.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Epic Toon FX/Prefabs/Interactive/Powerups/PowerOrbElemental/PowerOrbStormElemental.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Epic Toon FX/Prefabs/Interactive/Powerups/PowerOrbElemental/PowerOrbStormElemental.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Epic Toon FX/Prefabs/Interactive/Trails/LightningFloorPurpleTrail.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Epic Toon FX/Prefabs/Interactive/Trails/LightningFloorPurpleTrail.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Epic Toon FX/Prefabs/Interactive/Trails/LightningFloorYellowTrail.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Epic Toon FX/Prefabs/Interactive/Trails/LightningFloorYellowTrail.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Epic Toon FX/Demo/Textures/devtarget.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Epic Toon FX/Demo/Textures/devtarget.png.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/GUI Pro-CasualGame/Prefabs/Prefabs_Component_Slider/_PrefabsPanel_Slider_2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GUI Pro-CasualGame/Prefabs/Prefabs_Component_Slider/_PrefabsPanel_Slider_2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/Alts/PolygonBattleRoyale_Veh_02.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/Alts/PolygonBattleRoyale_Veh_02.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/Alts/PolygonBattleRoyale_Veh_06.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/Alts/PolygonBattleRoyale_Veh_06.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/Alts/PolygonBattleRoyale_Veh_Destroyed_01.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/Alts/PolygonBattleRoyale_Veh_Destroyed_01.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/Alts/PolygonBattleRoyale_Veh_Glass.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/Alts/PolygonBattleRoyale_Veh_Glass.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/Alts/PolygonBattleRoyale_Veh_Plane_Destroyed_01.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/Alts/PolygonBattleRoyale_Veh_Plane_Destroyed_01.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/Alts/PolygonBattleRoyale_Veh_Tank_Tracks.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/Alts/PolygonBattleRoyale_Veh_Tank_Tracks.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/Alts/PolygonBattleRoyale_WireFence.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/Alts/PolygonBattleRoyale_WireFence.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/FX/PolygonBattleRoyale_Water.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/FX/PolygonBattleRoyale_Water.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/PolygonBattleRoyale_04_A.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/PolygonBattleRoyale_04_A.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/PolygonBattleRoyale_Veh_01.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/PolygonBattleRoyale_Veh_01.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Icons/SliderDotsGold.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Icons/SliderDotsGold.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Icons/SliderDotsGray.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Icons/SliderDotsGray.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Particles/PowerOrbFireElemental.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Particles/PowerOrbFireElemental.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SinglePlayer.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SinglePlayer.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/AttachManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/AttachManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/SpawnManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/SpawnManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/LeaderBoardManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/LeaderBoardManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/SinglePlayerUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/SinglePlayerUIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/StaminaSlider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/StaminaSlider.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +33,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/ComboUI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.8.13/Editor/BurstAotCompiler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.8.13/Editor/BurstDisassembler.Core.ARM64.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.8.13/Editor/BurstDisassembler.Core.x86.info.cs" root0="SKIP_HIGHLIGHTING" />
@@ -51,9 +41,11 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.9.7/Runtime/Behaviours/CinemachineVirtualCamera.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_InputField.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/ExecuteEvents.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/UIBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Selectable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/92f8bbba597a4c848e8aa06f7ebfe3ad175800/47/62451827/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/92f8bbba597a4c848e8aa06f7ebfe3ad175800/4e/b53f17a9/UnityAction.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/92f8bbba597a4c848e8aa06f7ebfe3ad175800/c8/e93e151c/SetupCoroutine.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/92f8bbba597a4c848e8aa06f7ebfe3ad175800/d5/1dd0eb78/InvokableCall.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/92f8bbba597a4c848e8aa06f7ebfe3ad175800/fb/173221e4/UnityEvent.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -118,10 +110,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="1187">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="1330">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="1187" />
+      <option name="pid" value="1330" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -147,7 +139,8 @@
       <workItem from="1721660465755" duration="11000" />
       <workItem from="1721660961706" duration="1824000" />
       <workItem from="1721722939153" duration="22443000" />
-      <workItem from="1721809498971" duration="15942000" />
+      <workItem from="1721809498971" duration="16716000" />
+      <workItem from="1721896187864" duration="17784000" />
     </task>
     <servers />
   </component>

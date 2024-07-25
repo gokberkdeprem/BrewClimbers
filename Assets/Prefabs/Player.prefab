@@ -413,7 +413,12 @@ MonoBehaviour:
       m_Calls: []
   _isAttached: 0
   _canAttach: 1
-  _greenOrbParticle: {fileID: 4093388251964594678}
+  _circleIndicator: {fileID: 4093388251964594678}
+  AttachedObject: {fileID: 0}
+  OnAttachedObjectChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  _playerController: {fileID: 5187602417463193851}
 --- !u!1 &1565667193978825481
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,7 +976,10 @@ MonoBehaviour:
   OnTouch:
     m_PersistentCalls:
       m_Calls: []
-  OnStaminaChanged:
+  OnInsufficientStamina:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStreakChanged:
     m_PersistentCalls:
       m_Calls: []
   _rightHandRb: {fileID: 9083214988022688871}
@@ -982,11 +990,11 @@ MonoBehaviour:
   _staminaLimit: 3
   _playerController: {fileID: 5187602417463193851}
   _isAttached: 0
-  _canAttach: 0
   _rightHandAttMan: {fileID: 8228301404433136957}
   _leftHandAttMan: {fileID: 1168109308092434295}
   _stamina: 0
-  _staminaFillRate: 0.02
+  _staminaFillRate: 1
+  TargetObject: {fileID: 0}
   rigidbodies: []
 --- !u!1 &2980571888160536740
 GameObject:
@@ -10564,7 +10572,12 @@ MonoBehaviour:
       m_Calls: []
   _isAttached: 0
   _canAttach: 1
-  _greenOrbParticle: {fileID: 7391378522697042215}
+  _circleIndicator: {fileID: 7391378522697042215}
+  AttachedObject: {fileID: 0}
+  OnAttachedObjectChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  _playerController: {fileID: 5187602417463193851}
 --- !u!1 &7337075693190706870
 GameObject:
   m_ObjectHideFlags: 0

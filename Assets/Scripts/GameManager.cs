@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private FinishLineController _finishLineController;
     private PlayerController _playerController;
     public SpawnManager SpawnManager;
-    public GameObject CameraPlane;
+    public GroundController GroundController;
     
     private static GameManager _instance;
     public static GameManager Instance

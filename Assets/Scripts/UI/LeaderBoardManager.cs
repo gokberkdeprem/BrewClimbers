@@ -16,7 +16,7 @@ namespace UI
         [SerializeField] private Button _submitButton;
         [SerializeField] private Image _submitButtonImage;
         [SerializeField] private TMP_Text _highScoreText;
-        [SerializeField] private SinglePlayerUIManager singlePlayerUIManager;
+        [SerializeField] private SinglePlayerUIManager _singlePlayerUIManager;
         [SerializeField] private GameManager _gameManager;
         
 
@@ -40,7 +40,7 @@ namespace UI
                 {
                     List<LeaderBoard> leaderBoards = new List<LeaderBoard>()
                     {
-                        new(_saveRecordInputField.text, TimeSpan.FromSeconds(singlePlayerUIManager.Timer))
+                        new(_saveRecordInputField.text, TimeSpan.FromSeconds(_singlePlayerUIManager.Timer))
                     };
 
                     var leaderBoardsString = JsonConvert.SerializeObject(leaderBoards);
@@ -49,7 +49,7 @@ namespace UI
                 else
                 {
                     List<LeaderBoard> leaderBoards = JsonConvert.DeserializeObject<List<LeaderBoard>>(leaderboard);
-                    leaderBoards.Add(new LeaderBoard(_saveRecordInputField.text, TimeSpan.FromSeconds(singlePlayerUIManager.Timer)));
+                    leaderBoards.Add(new LeaderBoard(_saveRecordInputField.text, TimeSpan.FromSeconds(_singlePlayerUIManager.Timer)));
                     leaderBoards.Sort((x, y) => TimeSpan.Compare(x.Time, y.Time));
                 
                     var leaderBoardsString = JsonConvert.SerializeObject(leaderBoards);
@@ -60,12 +60,13 @@ namespace UI
                 _submitButtonImage.color = Color.green;
                 _submitButton.enabled = false;
                 _warningText.text = "Record is successfully saved.";
+                
             }
         }
 
         private void GameOver()
         {
-            _highScoreText.text = "Score: " + singlePlayerUIManager.TimerText.text;
+            _highScoreText.text = "Score: " + _singlePlayerUIManager.TimerText.text;
         }
         
         
@@ -75,11 +76,9 @@ namespace UI
             _submitButtonImage.color = Color.red;
             yield return new WaitForSeconds(1);
             _submitButtonImage.color = temp;
-
+            _singlePlayerUIManager.ToggleSaveScorePanel();
         }
     }
-    
-    
 
     public class LeaderBoard
     {

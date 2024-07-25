@@ -10,12 +10,15 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
     public UnityEvent<Transform> OnTouch;
-    public UnityEvent<float> OnStaminaChanged;
+    public UnityEvent OnInsufficientStamina;
+    public UnityEvent<int> OnStreakChanged;
+    
     [SerializeField] private Rigidbody _rightHandRb;
     [SerializeField] private Rigidbody _leftHandRb;
     [SerializeField] private Rigidbody _hipsRb;
@@ -24,7 +27,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int _staminaLimit;
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private bool _isAttached;
-    [SerializeField] private bool _canAttach;
 
     [SerializeField] private AttachManager _rightHandAttMan;
     [SerializeField] private AttachManager _leftHandAttMan;
@@ -34,7 +36,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _staminaFillRate;
     private GameManager _gameManager;
     private bool isFilling;
+    
     private GameObject _tappedObject;
+    public GameObject TargetObject;
+    private int _combo;
 
     // public int RemainingTap => _remainingTap;
     public float Stamina
@@ -58,7 +63,31 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private bool CanJump => Stamina >= 1;
+
+    public int Combo
+    {
+        get => _combo;
+        set
+        {
+            _combo = value;
+            OnStreakChanged.Invoke(_combo);
+        }
+    }
+    
+
+    private bool CanJump
+    {
+        get
+        {
+            if (Stamina >= 1)
+            {
+                return true;
+            }
+            OnInsufficientStamina.Invoke(); 
+            return false;
+        }
+    }
+        
 
 
     [SerializeField] private Rigidbody[] rigidbodies;
@@ -78,12 +107,17 @@ public class PlayerController : MonoBehaviour
         _gameManager.OnGameOver.AddListener(GameOver);
         _gameManager.PlayerController = _playerController;
         StartCoroutine(CheckAttachStatus());
-        _gameManager.SpawnManager.OnRespawn.AddListener(OnRespawn);
+        _gameManager.SpawnManager.OnRespawn.AddListener(ResetPlayer);
+        _gameManager.GroundController.OnGroundTouched.AddListener(ResetPlayer);
+        
+        _rightHandAttMan.OnHitTarget.AddListener(CheckForCombo);
+        _leftHandAttMan.OnHitTarget.AddListener(CheckForCombo);
     }
 
-    private void OnRespawn()
+    private void ResetPlayer()
     {
         Stamina = _staminaLimit;
+        Combo = 0;
     }
 
     private IEnumerator CheckAttachStatus()
@@ -99,13 +133,47 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    
+    private void CheckForCombo(bool isHitToTarget)
+    {
+        if (isHitToTarget)
+        {
+            Stamina += 1;
+            Combo += 1;
+            _rightHandAttMan.AttachedObject = null;
+            _leftHandAttMan.AttachedObject = null;
+        }
+        else
+        {
+            Combo = 0;
+        }
+        TargetObject = null;
+    }
+    
+    // private IEnumerator CheckForStreak()
+    // {
+    //     yield return new WaitForSeconds(1.5f);
+    //     
+    //     if (TargetObject == _rightHandAttMan.AttachedObject || TargetObject == _leftHandAttMan.AttachedObject)
+    //     {
+    //         _rightHandAttMan.AttachedObject = null;
+    //         _leftHandAttMan.AttachedObject = null;
+    //         Stamina += 1;
+    //         Combo += 1;
+    //     }
+    //     else
+    //     {
+    //         Combo = 0;
+    //     }
+    // }
+    
     private IEnumerator FillStamina()
     {
         isFilling = true;
         while (_isAttached && Stamina < 3 && _staminaFillRate > 0)
         {
             yield return new WaitForSeconds(0.01f);
-            Stamina += _staminaFillRate;
+            Stamina += Time.deltaTime * _staminaFillRate;
         }
         isFilling = false;
     }
@@ -114,7 +182,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         _isAttached = _leftHandAttMan._isAttached || _rightHandAttMan._isAttached;
-        _canAttach = _leftHandAttMan._canAttach && _rightHandAttMan._canAttach;
         
         if (Input.touchCount > 0 && !_gameManager.IsGameOver && CanJump)
         {
@@ -132,9 +199,13 @@ public class PlayerController : MonoBehaviour
                     if (colliderGameObject.layer == LayerHelper.GetLayer(Layers.Brick) && colliderGameObject != _tappedObject)
                     {
                         _tappedObject = colliderGameObject;
+                        TargetObject = colliderGameObject;
                         
                         OnTouch.Invoke(colliderGameObject.transform);
-                        Vector3 target = hit.collider.gameObject.transform.position;
+                        // Vector3 target = hit.collider.gameObject.transform.position;
+                        Vector3 target = hit.transform.position;
+                        
+                        
                         var activeHand = target.x > transform.position.x ? _rightHandRb : _leftHandRb;
                         _rightHandRb.isKinematic = false;
                         _leftHandRb.isKinematic = false;
@@ -146,7 +217,6 @@ public class PlayerController : MonoBehaviour
                     }
 
                     StartCoroutine(RemoveTappedObject());
-
                 }
             }
         }

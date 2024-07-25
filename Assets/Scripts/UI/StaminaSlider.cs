@@ -10,60 +10,82 @@ namespace UI
     public class StaminaSlider : MonoBehaviour
     {
         [SerializeField] private Slider _staminaSlider;
+        [SerializeField] private Image[] _staminaJumpCounts = new Image[3];
         [SerializeField] private Sprite _goldColor;
         [SerializeField] private Sprite _greyColor;
+
+        [SerializeField] private Image _staminaFillColor;
+        [SerializeField] private Sprite _redSliderFill;
+        [SerializeField] private Sprite _goldSliderFill;
+        
+        
         [SerializeField] private float _fillDuration = 3;
         [SerializeField] private float _emptyDuration = 0.1f;
-        [SerializeField] private Button testButton;
         [SerializeField] private float _value;
-        [SerializeField] private Image[] _staminaJumpCounts = new Image[3];
-        private Sequence _sequence;
+        
         private PlayerController _playerController;
+        private Sequence _sequence;
         private bool canUpdateStamina;
         private float _previousStamina;
+        
         private void Start()
         {
-            GameManager.Instance.OnPlayerInstantiated.AddListener(InitializeStamina);
+            GameManager.Instance.OnPlayerInstantiated.AddListener(OnPlayerInstantiated);
+            
             _staminaSlider.value = 0;
             _previousStamina = -1;
         }
 
         private void Update()
         {
-            if(canUpdateStamina)
-             _staminaSlider.value = _playerController.Stamina;
+            if (canUpdateStamina)
+            {
+                _staminaSlider.value = _playerController.Stamina;
             
-            if (Mathf.Approximately(_playerController.Stamina, 3))
-            {
-                _staminaJumpCounts[0].sprite = _goldColor;
-                _staminaJumpCounts[1].sprite = _goldColor;
-                _staminaJumpCounts[2].sprite = _goldColor;
+                if (Mathf.Approximately(_playerController.Stamina, 3))
+                {
+                    _staminaJumpCounts[0].sprite = _goldColor;
+                    _staminaJumpCounts[1].sprite = _goldColor;
+                    _staminaJumpCounts[2].sprite = _goldColor;
+                }
+                else if (_playerController.Stamina >= 2)
+                {
+                    _staminaJumpCounts[0].sprite = _goldColor;
+                    _staminaJumpCounts[1].sprite = _goldColor;
+                    _staminaJumpCounts[2].sprite = _greyColor;
+                }
+                else if (_playerController.Stamina >= 1)
+                {
+                    _staminaJumpCounts[0].sprite = _goldColor;
+                    _staminaJumpCounts[1].sprite = _greyColor;
+                    _staminaJumpCounts[2].sprite = _greyColor;
+                }
+                else
+                {
+                    _staminaJumpCounts[0].sprite = _greyColor;
+                    _staminaJumpCounts[1].sprite = _greyColor;
+                    _staminaJumpCounts[2].sprite = _greyColor;
+                }
             }
-            else if (_playerController.Stamina >= 2)
-            {
-                _staminaJumpCounts[0].sprite = _goldColor;
-                _staminaJumpCounts[1].sprite = _goldColor;
-                _staminaJumpCounts[2].sprite = _greyColor;
-            }
-            else if (_playerController.Stamina >= 1)
-            {
-                _staminaJumpCounts[0].sprite = _goldColor;
-                _staminaJumpCounts[1].sprite = _greyColor;
-                _staminaJumpCounts[2].sprite = _greyColor;
-            }
-            else
-            {
-                _staminaJumpCounts[0].sprite = _greyColor;
-                _staminaJumpCounts[1].sprite = _greyColor;
-                _staminaJumpCounts[2].sprite = _greyColor;
-            }
-            
         }
 
-        private void InitializeStamina()
+        private void OnPlayerInstantiated()
         {
             _playerController = GameManager.Instance.PlayerController;
             canUpdateStamina = true;
+            _playerController.OnInsufficientStamina.AddListener(ChangeSliderFillColor);
+        }
+
+        private void ChangeSliderFillColor()
+        {
+            StartCoroutine(ToggleColor());
+        }
+
+        private IEnumerator ToggleColor()
+        {
+            _staminaFillColor.sprite = _redSliderFill;
+            yield return new WaitForSeconds(0.5f);
+            _staminaFillColor.sprite = _goldSliderFill;
         }
 
         public void FillSliderWithCustomValue(float targetValue, bool isFill, float fillDuration)

@@ -110,7 +110,7 @@ namespace UI
                 _pauseMenuCanvas.SetActive(true);
         }
 
-        void ToggleSaveScorePanel()
+        public void ToggleSaveScorePanel()
         {
             if (_leaderboardUserInputPanel.activeInHierarchy)
                 _leaderboardUserInputPanel.SetActive(false);
