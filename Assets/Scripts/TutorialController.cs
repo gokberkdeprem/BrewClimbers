@@ -7,17 +7,9 @@ using UnityEngine;
 public class TutorialController : MonoBehaviour
 {
     [SerializeField] private GameObject _tutorial;
-
-    [SerializeField] private bool _resetTutorial;
     
     private void Start()
     {
-        if (_resetTutorial)
-        {
-            PlayerPrefs.DeleteKey("Tutorial");
-            PlayerPrefs.Save();
-        }
-
         _tutorial.SetActive(!PlayerPrefs.HasKey("Tutorial"));
     }
 

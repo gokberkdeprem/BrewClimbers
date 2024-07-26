@@ -406,7 +406,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tutorial: {fileID: 52095759}
-  _resetTutorial: 0
 --- !u!4 &52095761
 Transform:
   m_ObjectHideFlags: 0
