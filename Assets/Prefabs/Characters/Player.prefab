@@ -415,7 +415,7 @@ MonoBehaviour:
   _canAttach: 1
   _circleIndicator: {fileID: 4093388251964594678}
   AttachedObject: {fileID: 0}
-  OnAttachedObjectChanged:
+  OnHitTarget:
     m_PersistentCalls:
       m_Calls: []
   _playerController: {fileID: 5187602417463193851}
@@ -982,6 +982,11 @@ MonoBehaviour:
   OnStreakChanged:
     m_PersistentCalls:
       m_Calls: []
+  OnJumpStart:
+    m_PersistentCalls:
+      m_Calls: []
+  PlayerTransform: {fileID: 4241453824921688640}
+  _isJumping: 0
   _rightHandRb: {fileID: 9083214988022688871}
   _leftHandRb: {fileID: 2055381236930103276}
   _hipsRb: {fileID: 3587574849185055730}
@@ -995,6 +1000,7 @@ MonoBehaviour:
   _stamina: 0
   _staminaFillRate: 1
   TargetObject: {fileID: 0}
+  TargetObjectController: {fileID: 0}
   rigidbodies: []
 --- !u!1 &2980571888160536740
 GameObject:
@@ -10574,7 +10580,7 @@ MonoBehaviour:
   _canAttach: 1
   _circleIndicator: {fileID: 7391378522697042215}
   AttachedObject: {fileID: 0}
-  OnAttachedObjectChanged:
+  OnHitTarget:
     m_PersistentCalls:
       m_Calls: []
   _playerController: {fileID: 5187602417463193851}

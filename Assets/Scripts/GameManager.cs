@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     private PlayerController _playerController;
     public SpawnManager SpawnManager;
     public GroundController GroundController;
+    public List<ButtonController> TouchedButtons;
+    public List<ButtonController> ComboAttemptButtons;
     
     private static GameManager _instance;
     public static GameManager Instance
@@ -36,7 +38,6 @@ public class GameManager : MonoBehaviour
             return _instance;
         }
     }
-    
     
     private void Awake()
     {
@@ -72,4 +73,30 @@ public class GameManager : MonoBehaviour
         IsGameOver = true;
         OnGameOver.Invoke();
     }
+
+    public void ResetButtonColors()
+    {
+        if(TouchedButtons.Count <= 0)
+            return;
+        
+        foreach (var button in TouchedButtons)
+        {
+            button.ChangeColorToRed();
+        }
+        TouchedButtons.Clear();
+    }
+
+    public void ResetComboAttemptButtons()
+    {
+        if(ComboAttemptButtons.Count <= 0)
+            return;
+            
+        foreach (var button in ComboAttemptButtons)
+        {
+            if(button.CurrentColor == Color.yellow)
+                button.ChangeColorToRed();
+        }
+        ComboAttemptButtons.Clear();
+    }
+    
 }

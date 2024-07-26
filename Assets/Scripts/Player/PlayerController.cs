@@ -18,6 +18,10 @@ public class PlayerController : MonoBehaviour
     public UnityEvent<Transform> OnTouch;
     public UnityEvent OnInsufficientStamina;
     public UnityEvent<int> OnStreakChanged;
+    public UnityEvent OnJumpStart;
+    public Transform PlayerTransform;
+    public bool _isJumping;
+    
     
     [SerializeField] private Rigidbody _rightHandRb;
     [SerializeField] private Rigidbody _leftHandRb;
@@ -31,14 +35,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AttachManager _rightHandAttMan;
     [SerializeField] private AttachManager _leftHandAttMan;
     
-    
     [SerializeField] private float _stamina;
     [SerializeField] private float _staminaFillRate;
     private GameManager _gameManager;
+    
     private bool isFilling;
     
     private GameObject _tappedObject;
     public GameObject TargetObject;
+    public ButtonController TargetObjectController;
     private int _combo;
 
     // public int RemainingTap => _remainingTap;
@@ -63,7 +68,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     public int Combo
     {
         get => _combo;
@@ -87,19 +91,28 @@ public class PlayerController : MonoBehaviour
             return false;
         }
     }
-        
-
 
     [SerializeField] private Rigidbody[] rigidbodies;
-    // [ContextMenu("Set Rigidbodies")]
-    // void SetRigidBodies()
-    // {
-    //     rigidbodies = GetComponentsInChildren<Rigidbody>();
-    // }
+    [ContextMenu("Enable Projections")]
+    void SetRigidBodies()
+    {
+        // rigidbodies = GetComponentsInChildren<Rigidbody>();
+        CharacterJoint[] characterJoints = GetComponentsInChildren<CharacterJoint>();
+        foreach (var cj in characterJoints)
+        {
+            cj.enableProjection = true;
+        }
+    }
     
     
     void Start()
     {
+        if (_staminaFillRate <= 0)
+        {
+            _staminaFillRate = 1;
+            throw new Exception("Stamina fill rate must be greater than 0 to prevent infinite loop at FillStamina method.");
+        }
+        
         _gameManager = GameManager.Instance;
         _virtualCamera = GameManager.Instance.VirtualCamera;
         _stamina = _staminaLimit;
@@ -112,12 +125,17 @@ public class PlayerController : MonoBehaviour
         
         _rightHandAttMan.OnHitTarget.AddListener(CheckForCombo);
         _leftHandAttMan.OnHitTarget.AddListener(CheckForCombo);
+        
+        _rightHandAttMan.OnAttachStatusChanged.AddListener(delegate{OnJumpStart.Invoke();});
+        _leftHandAttMan.OnAttachStatusChanged.AddListener(delegate{OnJumpStart.Invoke();});
     }
 
     private void ResetPlayer()
     {
         Stamina = _staminaLimit;
         Combo = 0;
+        _gameManager.ResetButtonColors();
+        _gameManager.ResetComboAttemptButtons();
     }
 
     private IEnumerator CheckAttachStatus()
@@ -132,12 +150,13 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
     
     private void CheckForCombo(bool isHitToTarget)
     {
         if (isHitToTarget)
         {
+            TargetObjectController.ChangeColorToGreen();
+            GameManager.Instance.ResetComboAttemptButtons();
             Stamina += 1;
             Combo += 1;
             _rightHandAttMan.AttachedObject = null;
@@ -145,6 +164,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            GameManager.Instance.ResetComboAttemptButtons();
             Combo = 0;
         }
         TargetObject = null;
@@ -183,6 +203,8 @@ public class PlayerController : MonoBehaviour
     {
         _isAttached = _leftHandAttMan._isAttached || _rightHandAttMan._isAttached;
         
+        _isJumping = !_isAttached;
+        
         if (Input.touchCount > 0 && !_gameManager.IsGameOver && CanJump)
         {
             Touch touch = Input.GetTouch(0);
@@ -196,10 +218,13 @@ public class PlayerController : MonoBehaviour
                 {
                     var colliderGameObject = hit.collider.gameObject;
                     
-                    if (colliderGameObject.layer == LayerHelper.GetLayer(Layers.Brick) && colliderGameObject != _tappedObject)
+                    if (colliderGameObject.layer == LayerHelper.GetLayer(Layers.Button) && colliderGameObject != _tappedObject)
                     {
                         _tappedObject = colliderGameObject;
                         TargetObject = colliderGameObject;
+
+                        TargetObjectController = TargetObject.GetComponent<ButtonController>();
+                        TargetObjectController.ChangeColorToYellow();
                         
                         OnTouch.Invoke(colliderGameObject.transform);
                         // Vector3 target = hit.collider.gameObject.transform.position;
@@ -212,8 +237,13 @@ public class PlayerController : MonoBehaviour
                         
                         Vector3 targetDirection = (target - activeHand.transform.position).normalized;
                         activeHand.AddForce(targetDirection * _force, ForceMode.Impulse);
-                        
                         Stamina -= 1;
+
+                        if (!_isJumping)
+                        {
+                            _isJumping = true;
+                            OnJumpStart.Invoke();
+                        }
                     }
 
                     StartCoroutine(RemoveTappedObject());
@@ -224,7 +254,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator RemoveTappedObject()
     {
-        // To prevent the double tap
+        // To prevent the double tap to a obstacle
         yield return new WaitForSeconds(1f);
         _tappedObject = null;
     }

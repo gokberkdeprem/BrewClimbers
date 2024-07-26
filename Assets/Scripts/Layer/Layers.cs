@@ -7,7 +7,7 @@ namespace Layer
         IgnoreRaycast = 2,
         Water = 4,
         UI = 5,
-        Brick = 6,
+        Button = 6,
         Player = 7,
         Threshold = 8,
         

@@ -5,12 +5,14 @@ using Layer;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 using UnityEngine.Serialization;
 using Object = System.Object;
 
 public class AttachManager : MonoBehaviour
 {
     [SerializeField] private Rigidbody _handRb;
+    [SerializeField] private Rigidbody _elbowRb;
     [SerializeField] private Collider _handCollider;
     [SerializeField] public UnityEvent OnAttachStatusChanged;
     public bool _isAttached;
@@ -20,10 +22,14 @@ public class AttachManager : MonoBehaviour
     public GameObject AttachedObject;
      public UnityEvent<bool> OnHitTarget;
     [SerializeField] private PlayerController _playerController;
+    [SerializeField] private GameObject _playerRoot;
+    [SerializeField] private Rigidbody[] _rbs;
+    [SerializeField] private bool _isTriggerEntered = false;
 
     private void Start()
     {
         _circleIndicator.SetActive(true);
+        _rbs = _playerRoot.GetComponentsInChildren<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -41,7 +47,8 @@ public class AttachManager : MonoBehaviour
             {
                 if(!isCanAttachStatusChanging)
                     StartCoroutine(AttachDelay());
-                
+
+                _isTriggerEntered = false;
                 _isAttached = false;
                 OnAttachStatusChanged.Invoke();
             }
@@ -50,31 +57,29 @@ public class AttachManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerHelper.GetLayer(Layers.Brick) && _canAttach)
+        if (other.gameObject.layer == LayerHelper.GetLayer(Layers.Button) && _canAttach && !_isTriggerEntered)
         {
             if (_playerController?.TargetObject != null)
             {
-                var name = gameObject.name;
 
                 var first = other.gameObject;
                 var second = _playerController.TargetObject;
 
                 var x = ReferenceEquals(first, second);
-                
                 OnHitTarget.Invoke(x);
-                // _playerController.TargetObject = null;
             }
             
+            other.gameObject.GetComponent<ButtonController>().ChangeColorToGreen();
             AttachedObject = other.gameObject;
+            
             _handRb.isKinematic = true;
             _isAttached = true;
-            OnAttachStatusChanged.Invoke();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == LayerHelper.GetLayer(Layers.Brick))
+        if (other.gameObject.layer == LayerHelper.GetLayer(Layers.Button))
         {
             AttachedObject = null;
             _handRb.isKinematic = false;
@@ -86,17 +91,15 @@ public class AttachManager : MonoBehaviour
     IEnumerator AttachDelay()
     {
         _canAttach = false;
-        OnAttachStatusChanged.Invoke();
         isCanAttachStatusChanging = true;
-        ToggleOrb();
+        ToggleCircleIndicator();
         yield return new WaitForSeconds(0.5f);
         isCanAttachStatusChanging = false;
         _canAttach = true;
-        OnAttachStatusChanged.Invoke();
-        ToggleOrb();
+        ToggleCircleIndicator();
     }
 
-    private void ToggleOrb()
+    private void ToggleCircleIndicator()
     {
         _circleIndicator.SetActive(!_circleIndicator.activeInHierarchy);
     }
