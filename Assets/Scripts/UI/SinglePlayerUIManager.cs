@@ -51,7 +51,7 @@ namespace UI
         
             // Pause Menu Canvas
             _continueButton.onClick.AddListener(TogglePauseMenu);
-            _pauseMenuRestartButton.onClick.AddListener(LoadSinglePlayer);
+            _pauseMenuRestartButton.onClick.AddListener(ReloadScene);
             _pauseMainMenuButton.onClick.AddListener(LoadMainMenu);
             _hiddenCloseButton.onClick.AddListener(TogglePauseMenu);
         
@@ -59,38 +59,13 @@ namespace UI
             _saveScoreButton.onClick.AddListener(ToggleSaveScorePanel);
             _closeSaveScorePanel.onClick.AddListener(ToggleSaveScorePanel);
             // _hiddenCloseSaveScorePanel.onClick.AddListener(ToggleSaveScorePanel);
-            _endMenuRestartButton.onClick.AddListener(LoadSinglePlayer);
+            _endMenuRestartButton.onClick.AddListener(ReloadScene);
             _endMenuMainMenuButton.onClick.AddListener(LoadMainMenu);
         
             // Set canvas disabled on the start
             _pauseMenuCanvas.SetActive(false);
             _endMenuCanvas.SetActive(false);
-            
-            // Tap Count Canvas
-            // GameManager.Instance.OnPlayerInstantiated.AddListener(AddListenerForTabCount);
         }
-
-        private void AddListenerForTabCount()
-        {
-            // UpdateTabCount(GameManager.Instance.PlayerController.RemainingTap, true);
-            // GameManager.Instance.PlayerController.OnTapCountChange.AddListener(UpdateTabCount);
-        }
-
-        private void UpdateTabCount(int remainingTab, bool isRefreshed)
-        {
-            if (isRefreshed)
-                StartCoroutine(ChangeRemainingTapTextColor());
-                    
-            _tabCountText.text = $"Remaining Taps: {remainingTab}";
-        }
-
-        private IEnumerator ChangeRemainingTapTextColor()
-        {
-            _tabCountText.color = Color.green;
-            yield return new WaitForSeconds(0.5f);
-            _tabCountText.color = Color.white;
-        }
-
         void Update () {
 
             if(!_gameManager.IsGameOver){
@@ -129,10 +104,9 @@ namespace UI
             SceneManager.LoadScene(0);
         }
         
-        private void LoadSinglePlayer()
+        private void ReloadScene()
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-    
     }
 }

@@ -1,8 +1,7 @@
-using System;
 using System.Collections;
 using DG.Tweening;
+using Shared;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
@@ -23,7 +22,7 @@ namespace UI
         [SerializeField] private float _emptyDuration = 0.1f;
         [SerializeField] private float _value;
         
-        private PlayerController _playerController;
+        private PlayerControllerTJ _playerControllerTj;
         private Sequence _sequence;
         private bool canUpdateStamina;
         private float _previousStamina;
@@ -40,21 +39,21 @@ namespace UI
         {
             if (canUpdateStamina)
             {
-                _staminaSlider.value = _playerController.Stamina;
+                _staminaSlider.value = _playerControllerTj.Stamina;
             
-                if (Mathf.Approximately(_playerController.Stamina, 3))
+                if (Mathf.Approximately(_playerControllerTj.Stamina, 3))
                 {
                     _staminaJumpCounts[0].sprite = _goldColor;
                     _staminaJumpCounts[1].sprite = _goldColor;
                     _staminaJumpCounts[2].sprite = _goldColor;
                 }
-                else if (_playerController.Stamina >= 2)
+                else if (_playerControllerTj.Stamina >= 2)
                 {
                     _staminaJumpCounts[0].sprite = _goldColor;
                     _staminaJumpCounts[1].sprite = _goldColor;
                     _staminaJumpCounts[2].sprite = _greyColor;
                 }
-                else if (_playerController.Stamina >= 1)
+                else if (_playerControllerTj.Stamina >= 1)
                 {
                     _staminaJumpCounts[0].sprite = _goldColor;
                     _staminaJumpCounts[1].sprite = _greyColor;
@@ -71,9 +70,9 @@ namespace UI
 
         private void OnPlayerInstantiated()
         {
-            _playerController = GameManager.Instance.PlayerController;
+            _playerControllerTj = (PlayerControllerTJ)GameManager.Instance.PlayerController;
             canUpdateStamina = true;
-            _playerController.OnInsufficientStamina.AddListener(ChangeSliderFillColor);
+            _playerControllerTj.OnInsufficientStamina.AddListener(ChangeSliderFillColor);
         }
 
         private void ChangeSliderFillColor()

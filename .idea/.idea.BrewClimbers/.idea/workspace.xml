@@ -5,8 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a6e647a-c07b-4b55-b194-7c87be71e7a0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SinglePlayer.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SinglePlayer.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TutorialController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TutorialController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/RopeSwing/PlayerControllerRS.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/RopeSwing/PlayerControllerRS.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Shared.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BrewClimbers/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BrewClimbers/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ButtonAsset/Button.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/ButtonAsset/Button.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Characters/FemalePlayer.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Characters/FemalePlayer.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SinglePlayer.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SinglePlayer.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ButtonController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ButtonColorController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ButtonController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ButtonColorController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FinishLineController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FinishLineController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GroundController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GroundController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Particle/TouchParticleEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Particle/TouchParticleEffect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/AttachManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/AttachManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/SpawnManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/SpawnManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/ComboUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/ComboUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/HeightIndicatorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/HeightIndicatorController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/SinglePlayerUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/SinglePlayerUIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/StaminaSlider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/StaminaSlider.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +44,8 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/DynamicLine.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RagdollSwing.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/ComboUI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/HeightIndicatorController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.8.13/Editor/BurstAotCompiler.cs" root0="SKIP_HIGHLIGHTING" />
@@ -95,10 +124,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="1235">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="1646">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="1235" />
+      <option name="pid" value="1646" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -127,6 +156,9 @@
       <workItem from="1721809498971" duration="16716000" />
       <workItem from="1721896187864" duration="18445000" />
       <workItem from="1721983887232" duration="18823000" />
+      <workItem from="1722248336462" duration="1364000" />
+      <workItem from="1722251781946" duration="7972000" />
+      <workItem from="1722327572113" duration="19534000" />
     </task>
     <servers />
   </component>

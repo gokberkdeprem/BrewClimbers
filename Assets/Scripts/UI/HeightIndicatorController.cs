@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Shared;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class HeightIndicatorController : MonoBehaviour
@@ -11,7 +7,7 @@ public class HeightIndicatorController : MonoBehaviour
     [SerializeField] private Slider _heightSlider;
     [SerializeField] private Transform _finishPosition;
     [SerializeField]private Transform _groundPosition;
-    private PlayerController _playerController;
+    private PlayerControllerTJ _playerControllerTj;
     private bool _isPlayerInstantiated;
     
     
@@ -27,7 +23,7 @@ public class HeightIndicatorController : MonoBehaviour
         {
             var totalDistance = _finishPosition.position.y - _groundPosition.position.y;
         
-            var doneDistance = _playerController.PlayerTransform.position.y - _groundPosition.position.y;
+            var doneDistance = _playerControllerTj.PlayerTransform.position.y - _groundPosition.position.y;
             var calculation = doneDistance / totalDistance;
         
             _heightSlider.value = calculation;
@@ -36,7 +32,7 @@ public class HeightIndicatorController : MonoBehaviour
 
     private void OnPlayerInstantiated()
     {
-        _playerController = GameManager.Instance.PlayerController;
+        _playerControllerTj = (PlayerControllerTJ)GameManager.Instance.PlayerController;
         _isPlayerInstantiated = true;
     }
 

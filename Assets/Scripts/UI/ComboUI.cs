@@ -5,7 +5,7 @@ namespace UI
 {
     public class ComboUI : MonoBehaviour
     {
-        private PlayerController _playerController;
+        private PlayerControllerTJ _playerControllerTj;
         [SerializeField] private GameObject _streakParticle;
         [SerializeField] private TMP_Text _streakText;
         
@@ -19,8 +19,8 @@ namespace UI
 
         private void OnPlayerInstantiated()
         {
-            _playerController = GameManager.Instance.PlayerController;
-            _playerController.OnStreakChanged.AddListener(UpdateStreakText);
+            _playerControllerTj = (PlayerControllerTJ)GameManager.Instance.PlayerController;
+            _playerControllerTj.OnStreakChanged.AddListener(UpdateStreakText);
         }
 
         private void UpdateStreakText(int comboCount)

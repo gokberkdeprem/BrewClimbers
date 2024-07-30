@@ -1,21 +1,14 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
 using Cinemachine;
 using Layer;
-using TMPro;
-using UI;
-using Unity.VisualScripting;
-using UnityEditor;
+using Shared;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Rendering;
 using UnityEngine.Serialization;
 
-public class PlayerController : MonoBehaviour
+public class PlayerControllerTJ : PlayerController
 {
-    public UnityEvent<Transform> OnTouch;
     public UnityEvent OnInsufficientStamina;
     public UnityEvent<int> OnStreakChanged;
     public UnityEvent OnJumpStart;
@@ -29,7 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _force;
     [SerializeField] private CinemachineVirtualCamera _virtualCamera;
     [SerializeField] private int _staminaLimit;
-    [SerializeField] private PlayerController _playerController;
+    [FormerlySerializedAs("_playerController")] [SerializeField] private PlayerControllerTJ playerControllerTj;
     [SerializeField] private bool _isAttached;
 
     [SerializeField] private AttachManager _rightHandAttMan;
@@ -43,7 +36,7 @@ public class PlayerController : MonoBehaviour
     
     private GameObject _tappedObject;
     public GameObject TargetObject;
-    public ButtonController TargetObjectController;
+    [FormerlySerializedAs("TargetObjectController")] public ButtonColorController targetObjectColorController;
     private int _combo;
 
     // public int RemainingTap => _remainingTap;
@@ -118,7 +111,7 @@ public class PlayerController : MonoBehaviour
         _stamina = _staminaLimit;
         AssignCamera();
         _gameManager.OnGameOver.AddListener(GameOver);
-        _gameManager.PlayerController = _playerController;
+        _gameManager.PlayerController = playerControllerTj;
         StartCoroutine(CheckAttachStatus());
         _gameManager.SpawnManager.OnRespawn.AddListener(ResetPlayer);
         _gameManager.GroundController.OnGroundTouched.AddListener(ResetPlayer);
@@ -155,7 +148,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isHitToTarget)
         {
-            TargetObjectController.ChangeColorToGreen();
+            targetObjectColorController.ChangeColorToGreen();
             GameManager.Instance.ResetComboAttemptButtons();
             Stamina += 1;
             Combo += 1;
@@ -223,8 +216,8 @@ public class PlayerController : MonoBehaviour
                         _tappedObject = colliderGameObject;
                         TargetObject = colliderGameObject;
 
-                        TargetObjectController = TargetObject.GetComponent<ButtonController>();
-                        TargetObjectController.ChangeColorToYellow();
+                        targetObjectColorController = TargetObject.GetComponent<ButtonColorController>();
+                        targetObjectColorController.ChangeColorToYellow();
                         
                         OnTouch.Invoke(colliderGameObject.transform);
                         // Vector3 target = hit.collider.gameObject.transform.position;

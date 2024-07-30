@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Shared;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -16,8 +17,8 @@ public class GameManager : MonoBehaviour
     private PlayerController _playerController;
     public SpawnManager SpawnManager;
     public GroundController GroundController;
-    public List<ButtonController> TouchedButtons;
-    public List<ButtonController> ComboAttemptButtons;
+    public List<ButtonColorController> TouchedButtons;
+    public List<ButtonColorController> ComboAttemptButtons;
     
     private static GameManager _instance;
     public static GameManager Instance
@@ -44,12 +45,7 @@ public class GameManager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
-            // DontDestroyOnLoad(gameObject);
         }
-        // else if (_instance != this)
-        // {
-        //     Destroy(gameObject);
-        // }
     }
     
     void Start()

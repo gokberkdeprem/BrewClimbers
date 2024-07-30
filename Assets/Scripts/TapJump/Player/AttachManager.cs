@@ -21,7 +21,7 @@ public class AttachManager : MonoBehaviour
     private bool isCanAttachStatusChanging;
     public GameObject AttachedObject;
      public UnityEvent<bool> OnHitTarget;
-    [SerializeField] private PlayerController _playerController;
+    [FormerlySerializedAs("_playerController")] [SerializeField] private PlayerControllerTJ playerControllerTj;
     [SerializeField] private GameObject _playerRoot;
     [SerializeField] private Rigidbody[] _rbs;
     [SerializeField] private bool _isTriggerEntered = false;
@@ -59,20 +59,20 @@ public class AttachManager : MonoBehaviour
     {
         if (other.gameObject.layer == LayerHelper.GetLayer(Layers.Button) && _canAttach && !_isTriggerEntered)
         {
-            if (_playerController?.TargetObject != null)
+            if (playerControllerTj?.TargetObject != null)
             {
 
                 var first = other.gameObject;
-                var second = _playerController.TargetObject;
+                var second = playerControllerTj.TargetObject;
 
                 var x = ReferenceEquals(first, second);
                 OnHitTarget.Invoke(x);
             }
             
-            other.gameObject.GetComponent<ButtonController>().ChangeColorToGreen();
+            other.gameObject.GetComponent<ButtonColorController>().ChangeColorToGreen();
             AttachedObject = other.gameObject;
             
-            _handRb.isKinematic = true;
+            // _handRb.isKinematic = true;
             _isAttached = true;
         }
     }
