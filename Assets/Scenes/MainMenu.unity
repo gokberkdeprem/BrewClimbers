@@ -160,7 +160,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -1046.402, y: 933.16003}
+  m_SizeDelta: {x: -1046.402, y: 357.6}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &32116809
 MonoBehaviour:
@@ -1497,7 +1497,7 @@ PrefabInstance:
     - target: {fileID: 2452489010817988436, guid: f112556180188462e8d21b748d8da130,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2452489010817988436, guid: f112556180188462e8d21b748d8da130,
         type: 3}
@@ -1507,7 +1507,7 @@ PrefabInstance:
     - target: {fileID: 2452489010817988436, guid: f112556180188462e8d21b748d8da130,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2452489010817988436, guid: f112556180188462e8d21b748d8da130,
         type: 3}
@@ -1598,6 +1598,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TapJump
+      objectReference: {fileID: 0}
+    - target: {fileID: 2452489010817988437, guid: f112556180188462e8d21b748d8da130,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2452489010964834533, guid: f112556180188462e8d21b748d8da130,
         type: 3}
@@ -1908,6 +1913,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1127092703}
+  - component: {fileID: 1127092704}
   m_Layer: 5
   m_Name: LeaderBoard
   m_TagString: Untagged
@@ -1941,6 +1947,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1127092704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127092702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a317c2b2a0a384b438a142078efdff62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnabled:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1166597263
 GameObject:
   m_ObjectHideFlags: 0
@@ -2377,6 +2398,8 @@ MonoBehaviour:
   _tapJumpTabButton: {fileID: 4258160239540661056}
   _tapJumpText: {fileID: 3277407564403077572}
   _currentTab: 0
+  _defaultTab: 0
+  _lb: {fileID: 1127092704}
 --- !u!114 &1358385353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2408,6 +2431,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tapJumpStartButton: {fileID: 1025021787}
   _ropeSwingStartButton: {fileID: 302318792}
+  _closeButton: {fileID: 1622283437}
+  _hiddenCloseButton: {fileID: 1543978657}
+  _gameModsObject: {fileID: 0}
 --- !u!1 &1407076497
 GameObject:
   m_ObjectHideFlags: 0
@@ -3463,6 +3489,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1622283435}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1622283437 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2452489010817988427, guid: f112556180188462e8d21b748d8da130,
+    type: 3}
+  m_PrefabInstance: {fileID: 1622283435}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1732931426
 GameObject:
   m_ObjectHideFlags: 0
@@ -3932,7 +3970,7 @@ PrefabInstance:
     - target: {fileID: 2452489010817988436, guid: f112556180188462e8d21b748d8da130,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2452489010817988436, guid: f112556180188462e8d21b748d8da130,
         type: 3}
@@ -3942,7 +3980,7 @@ PrefabInstance:
     - target: {fileID: 2452489010817988436, guid: f112556180188462e8d21b748d8da130,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2452489010817988436, guid: f112556180188462e8d21b748d8da130,
         type: 3}
@@ -4012,7 +4050,7 @@ PrefabInstance:
     - target: {fileID: 2452489010817988436, guid: f112556180188462e8d21b748d8da130,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -745.36
+      value: -169.8
       objectReference: {fileID: 0}
     - target: {fileID: 2452489010817988436, guid: f112556180188462e8d21b748d8da130,
         type: 3}
@@ -4896,7 +4934,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1538370712777192822
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4913,7 +4951,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 405.49, y: -55.727905}
+  m_AnchoredPosition: {x: 132.9, y: -55.727905}
   m_SizeDelta: {x: 265.8, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1968241215048095262
@@ -5004,7 +5042,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &3277407564403077572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5267,7 +5305,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Tap Swing
+  m_text: 'Rope Swing
 
 '
   m_isRightToLeft: 0
