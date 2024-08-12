@@ -72,7 +72,7 @@ public class AttachManager : MonoBehaviour
             other.gameObject.GetComponent<ButtonColorController>().ChangeColorToGreen();
             AttachedObject = other.gameObject;
             
-            // _handRb.isKinematic = true;
+            _handRb.isKinematic = true;
             _isAttached = true;
         }
     }
@@ -93,7 +93,7 @@ public class AttachManager : MonoBehaviour
         _canAttach = false;
         isCanAttachStatusChanging = true;
         ToggleCircleIndicator();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         isCanAttachStatusChanging = false;
         _canAttach = true;
         ToggleCircleIndicator();

@@ -1,7 +1,10 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
@@ -15,29 +18,48 @@ namespace UI
         [SerializeField] private GameObject _leaderboardObject;
         [SerializeField] private GameObject _titleRibbon;
         [SerializeField] private GameObject _titleRibbonContainer;
-        private bool isPopulated;
+        [SerializeField] private Button _ropeSwingButton;
+        [SerializeField] private TMP_Text _ropeSwingText;
+        [SerializeField] private Button _tapJumpTabButton;
+        [SerializeField] private TMP_Text _tapJumpText;
+        [SerializeField] private LeaderboardTab _currentTab;
         
+        private bool isPopulated;
         
         void Start()
         {
-            _leaderBoardButton.onClick.AddListener(ListLeaderBoard);
+            var defaultTab = LeaderboardTab.TapJump;
+            _leaderBoardButton.onClick.AddListener(delegate { ListLeaderBoard(defaultTab); });
+            _ropeSwingButton.onClick.AddListener(delegate { ListLeaderBoard(LeaderboardTab.RopeSwing); });
+            _tapJumpTabButton.onClick.AddListener(delegate { ListLeaderBoard(LeaderboardTab.TapJump); });
             _closeButton.onClick.AddListener(ToggleSettings);
             _hiddenCloseButton.onClick.AddListener(ToggleSettings);
         }
-        private void ListLeaderBoard()
+        private void ListLeaderBoard(LeaderboardTab currentTab)
         {
-            if(isPopulated)
-                return;
+            var leaderboardString = String.Empty;
             
-            var leaderboardString = PlayerPrefs.GetString("LeaderBoard");
-
+            switch (currentTab)
+            {
+                case LeaderboardTab.RopeSwing:
+                    leaderboardString = PlayerPrefs.GetString("RopeSwingLeaderBoard");
+                    _ropeSwingText.color = Color.yellow;
+                    _tapJumpText.color = Color.white;
+                    break;
+                case LeaderboardTab.TapJump:
+                    leaderboardString = PlayerPrefs.GetString("TapJumpLeaderBoard");
+                    _ropeSwingText.color = Color.white;
+                    _tapJumpText.color = Color.yellow;
+                    break;
+            }
+            
+            foreach(Transform child in _titleRibbonContainer.transform)
+            {
+                Destroy(child.gameObject);
+            }
+            
             if (string.IsNullOrEmpty(leaderboardString))
             {
-                foreach(Transform child in _titleRibbonContainer.transform)
-                {
-                    Destroy(child.gameObject);
-                }
-                
                 var item = Instantiate(_titleRibbon, _titleRibbonContainer.transform, false);
                 item.GetComponentInChildren<TMP_Text>().text = "No Records Yet";
                 
@@ -52,7 +74,6 @@ namespace UI
                     item.GetComponentInChildren<TMP_Text>().text =
                         $"{i + 1}. {leaderboard[i].NickName} {leaderboard[i].Time}";
                 }
-
                 isPopulated = true;
             }
         }

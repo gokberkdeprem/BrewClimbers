@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Enums;
+using RopeSwing;
 using Shared;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -13,12 +15,16 @@ public class GameManager : MonoBehaviour
     public UnityEvent OnGameOver;
     public UnityEvent OnPlayerInstantiated;
     public CinemachineVirtualCamera VirtualCamera;
-    [SerializeField] private FinishLineController _finishLineController;
-    private PlayerController _playerController;
+    public GameMod CurrentGameMod;
+    
     public SpawnManager SpawnManager;
     public GroundController GroundController;
     public List<ButtonColorController> TouchedButtons;
     public List<ButtonColorController> ComboAttemptButtons;
+    
+    private PlayerController _playerController;
+    [SerializeField] private FinishLineController _finishLineController;
+    [SerializeField] private ButtonManager _buttonManager;
     
     private static GameManager _instance;
     public static GameManager Instance
@@ -51,7 +57,21 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         IsGameOver = false;
-        _finishLineController.OnFinish.AddListener(GameOver);
+        
+        // Tap Jump
+        if (_finishLineController)
+        {
+            CurrentGameMod = GameMod.TapJump;
+            _finishLineController.OnFinish.AddListener(GameOver);
+        }
+        
+        // Rope Swing
+        if (_buttonManager)
+        {
+            CurrentGameMod = GameMod.RopeSwing;
+            _buttonManager.OnAllButtonsAreCleared.AddListener(GameOver);
+        }
+        
     }
     
     public PlayerController PlayerController

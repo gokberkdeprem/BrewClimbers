@@ -13,6 +13,8 @@ namespace RopeSwing
     {
         [SerializeField] private Rigidbody _rightHandRb;
         [SerializeField] private Rigidbody _leftHandRb;
+        [SerializeField] private SpringJoint _ropeEndSpringJoint;
+        [SerializeField] private float _currentRopeLength;
         
         [SerializeField] private Rigidbody _hipsRb;
         [SerializeField] private float _force;
@@ -22,7 +24,8 @@ namespace RopeSwing
         [SerializeField] private Transform _ropeStart;
         [SerializeField] private Transform _ropeEnd;
         
-        [SerializeField] private float _ropeLength = 3;
+        [SerializeField] private float _ropeLengthMin = 3;
+        [SerializeField] private float _ropeLengthMax = 3;
         private GameManager _gameManager;
     
         private bool isFilling;
@@ -35,7 +38,17 @@ namespace RopeSwing
         private Rigidbody _activeHand;
         public UnityEvent _killCoRoutine;
         private Coroutine currentCoRoutine;
-        
+
+        public float CurrentRopeLength
+        {
+            get => _currentRopeLength;
+            set
+            {
+                _currentRopeLength = value;
+                if (_currentRopeLength < 0)
+                    _currentRopeLength = 0;
+            }
+        }
 
         [SerializeField] private Rigidbody[] rigidbodies;
         [ContextMenu("Enable Projections")]
@@ -56,7 +69,6 @@ namespace RopeSwing
         }
         void Start()
         {
-        
             _gameManager = GameManager.Instance;
             _virtualCamera = GameManager.Instance.VirtualCamera;
             AssignCamera();
@@ -115,18 +127,34 @@ namespace RopeSwing
 
         private IEnumerator MergeSpheres()
         {
+            CurrentRopeLength = _ropeLengthMax;
+            
             while (true)
             {
                 var distance = Vector3.Distance(_ropeStart.position, _ropeEnd.position);
                 _ropeStart.position = _activeHand.transform.position;
                 var isDownward = _ropeStart.position.y > _ropeEnd.position.y;
                 
-                if(distance >= _ropeLength)
-                    _activeHand.AddForce((_ropeEnd.position - _activeHand.position).normalized * (_force * distance / (isDownward ? 6 : 4)), ForceMode.Force);
+                if (distance >= _ropeLengthMin && !isDownward)
+                {
+                    _activeHand.AddForce((_ropeEnd.position - _activeHand.position).normalized * _force , ForceMode.Acceleration);
+                }
+
+                if (distance >= CurrentRopeLength)
+                {
+                    _activeHand.velocity = Vector3.zero;
+                    _activeHand.angularVelocity = Vector3.zero; 
+                }
+
+                if (CurrentRopeLength > 0)
+                {
+                    CurrentRopeLength -= 0.1f;
+                }
                 
                 yield return new WaitForFixedUpdate();
             }
         }
+
 
         private void AssignCamera()
         {

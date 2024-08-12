@@ -1,4 +1,5 @@
 using System.Collections;
+using Enums;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -101,12 +102,12 @@ namespace UI
         
         private void LoadMainMenu()
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene((int)GameModScene.MainMenu);
         }
         
         private void ReloadScene()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

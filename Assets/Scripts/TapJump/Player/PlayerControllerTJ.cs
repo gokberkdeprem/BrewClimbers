@@ -221,12 +221,14 @@ public class PlayerControllerTJ : PlayerController
                         
                         OnTouch.Invoke(colliderGameObject.transform);
                         // Vector3 target = hit.collider.gameObject.transform.position;
-                        Vector3 target = hit.transform.position;
                         
+                        Vector3 targetPosition = hit.transform.position;
                         
-                        var activeHand = target.x > transform.position.x ? _rightHandRb : _leftHandRb;
+                        var activeHand = targetPosition.x > transform.position.x ? _rightHandRb : _leftHandRb;
                         _rightHandRb.isKinematic = false;
                         _leftHandRb.isKinematic = false;
+
+                        var target = new Vector3(targetPosition.x, targetPosition.y, _hipsRb.transform.position.z);
                         
                         Vector3 targetDirection = (target - activeHand.transform.position).normalized;
                         activeHand.AddForce(targetDirection * _force, ForceMode.Impulse);

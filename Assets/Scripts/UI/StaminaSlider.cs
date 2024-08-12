@@ -18,21 +18,19 @@ namespace UI
         [SerializeField] private Sprite _goldSliderFill;
         
         
-        [SerializeField] private float _fillDuration = 3;
+        // [SerializeField] private float _fillDuration = 3;
         [SerializeField] private float _emptyDuration = 0.1f;
         [SerializeField] private float _value;
         
         private PlayerControllerTJ _playerControllerTj;
         private Sequence _sequence;
         private bool canUpdateStamina;
-        private float _previousStamina;
         
         private void Start()
         {
             GameManager.Instance.OnPlayerInstantiated.AddListener(OnPlayerInstantiated);
             
             _staminaSlider.value = 0;
-            _previousStamina = -1;
         }
 
         private void Update()

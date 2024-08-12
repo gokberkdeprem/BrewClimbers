@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Enums;
 using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
@@ -18,7 +19,6 @@ namespace UI
         [SerializeField] private TMP_Text _highScoreText;
         [SerializeField] private SinglePlayerUIManager _singlePlayerUIManager;
         [SerializeField] private GameManager _gameManager;
-        
 
         private void Start()
         {
@@ -28,6 +28,9 @@ namespace UI
     
         private void SubmitScore()
         {
+            
+            
+            
             if (string.IsNullOrEmpty(_saveRecordInputField.text))
             {
                 _warningText.text = "Nickname cannot be empty";
@@ -35,16 +38,28 @@ namespace UI
             }
             else
             {
-                var leaderboard = PlayerPrefs.GetString("LeaderBoard");
+                var leaderBoardKey = string.Empty;
+
+                switch (_gameManager.CurrentGameMod)
+                {
+                    case GameMod.TapJump:
+                        leaderBoardKey = "TapJumpLeaderBoard";
+                        break;
+                    case GameMod.RopeSwing:
+                        leaderBoardKey = "RopeSwingLeaderBoard";
+                        break;
+                }
+                
+                var leaderboard = PlayerPrefs.GetString(leaderBoardKey);
                 if (string.IsNullOrEmpty(leaderboard))
                 {
-                    List<LeaderBoard> leaderBoards = new List<LeaderBoard>()
+                    List<LeaderBoard> leaderBoards = new List<LeaderBoard>
                     {
                         new(_saveRecordInputField.text, TimeSpan.FromSeconds(_singlePlayerUIManager.Timer))
                     };
 
                     var leaderBoardsString = JsonConvert.SerializeObject(leaderBoards);
-                    PlayerPrefs.SetString("LeaderBoard", leaderBoardsString);
+                    PlayerPrefs.SetString(leaderBoardKey, leaderBoardsString);
                 }
                 else
                 {
@@ -53,14 +68,14 @@ namespace UI
                     leaderBoards.Sort((x, y) => TimeSpan.Compare(x.Time, y.Time));
                 
                     var leaderBoardsString = JsonConvert.SerializeObject(leaderBoards);
-                    PlayerPrefs.SetString("LeaderBoard", leaderBoardsString);
+                    PlayerPrefs.SetString(leaderBoardKey, leaderBoardsString);
                 }
                 PlayerPrefs.Save();
 
                 _submitButtonImage.color = Color.green;
                 _submitButton.enabled = false;
                 _warningText.text = "Record is successfully saved.";
-                
+                _singlePlayerUIManager.ToggleSaveScorePanel();
             }
         }
 
@@ -68,7 +83,6 @@ namespace UI
         {
             _highScoreText.text = "Score: " + _singlePlayerUIManager.TimerText.text;
         }
-        
         
         private IEnumerator ChangeSubmitButtonColor()
         {

@@ -22,8 +22,11 @@ public class SettingsMenu : MonoBehaviour
 
     private void ResetLeaderBoard()
     {
-        if (PlayerPrefs.HasKey("LeaderBoard"))
-            PlayerPrefs.DeleteKey("LeaderBoard");
+        if (PlayerPrefs.HasKey("RopeSwingLeaderBoard"))
+            PlayerPrefs.DeleteKey("RopeSwingLeaderBoard");
+        
+        if (PlayerPrefs.HasKey("TapJumpLeaderBoard"))
+            PlayerPrefs.DeleteKey("TapJumpLeaderBoard");
     }
 
     private void CloseSettings()
