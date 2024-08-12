@@ -23,19 +23,22 @@ namespace UI
         [SerializeField] private Button _tapJumpTabButton;
         [SerializeField] private TMP_Text _tapJumpText;
         [SerializeField] private LeaderboardTab _currentTab;
-        
+        [SerializeField] private  LeaderboardTab _defaultTab = LeaderboardTab.RopeSwing;
+        [SerializeField] private LB _lb;
         private bool isPopulated;
         
         void Start()
         {
-            var defaultTab = LeaderboardTab.TapJump;
-            _leaderBoardButton.onClick.AddListener(delegate { ListLeaderBoard(defaultTab); });
+            ListLeaderBoard(_defaultTab);
+            _lb.OnEnabled.AddListener(delegate { ListLeaderBoard(_defaultTab); });
+            _leaderBoardButton.onClick.AddListener(delegate { ListLeaderBoard(_defaultTab); });
             _ropeSwingButton.onClick.AddListener(delegate { ListLeaderBoard(LeaderboardTab.RopeSwing); });
             _tapJumpTabButton.onClick.AddListener(delegate { ListLeaderBoard(LeaderboardTab.TapJump); });
             _closeButton.onClick.AddListener(ToggleSettings);
             _hiddenCloseButton.onClick.AddListener(ToggleSettings);
         }
-        private void ListLeaderBoard(LeaderboardTab currentTab)
+
+        private void ListLeaderBoard(LeaderboardTab? currentTab = default)
         {
             var leaderboardString = String.Empty;
             

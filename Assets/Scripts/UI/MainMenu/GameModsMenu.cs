@@ -10,10 +10,16 @@ public class GameModsMenu : MonoBehaviour
 {
     [SerializeField] private Button _tapJumpStartButton;
     [SerializeField] private Button _ropeSwingStartButton;
+    
+    [SerializeField] private Button _closeButton;
+    [SerializeField] private Button _hiddenCloseButton;
+    [SerializeField] private GameObject _gameModsObject;
 
     private void Start()
     {
-        _tapJumpStartButton.onClick.AddListener(delegate{LoadGameScene(GameModScene.TapJump);});
+        _closeButton.onClick.AddListener(CloseSettings);
+        _hiddenCloseButton.onClick.AddListener(CloseSettings);
+        // _tapJumpStartButton.onClick.AddListener(delegate{LoadGameScene(GameModScene.TapJump);});
         _ropeSwingStartButton.onClick.AddListener(delegate{LoadGameScene(GameModScene.RopeSwing);});
     }
 
@@ -21,5 +27,10 @@ public class GameModsMenu : MonoBehaviour
     private void LoadGameScene(GameModScene scene)
     {
         SceneManager.LoadScene((int)scene);
+    }
+    
+    private void CloseSettings()
+    {
+        _gameModsObject.SetActive(false);
     }
 }
