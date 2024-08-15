@@ -5,13 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
+    path: Assets/Scenes/A.unity
+    guid: bf2e2932a80cc4d4498eac936610b2aa
+  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: 07bc5af817d1140d480fdd4e86b4f719
-  - enabled: 1
-    path: Assets/Scenes/SinglePlayerTapJump.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SinglePlayerRopeSwing.unity
     guid: fcad16be767d64999859f13d2050b7cd
+  - enabled: 0
+    path: Assets/Scenes/Multi/Lobby.unity
+    guid: ea0c3db79e6684807a6b8b5c6cbe4ccd
+  - enabled: 0
+    path: Assets/Scenes/Multi/LoadingScene.unity
+    guid: 0d1e59c6255534a4daf6923b12728187
+  - enabled: 1
+    path: Assets/Scenes/Multi/Multiplayer.unity
+    guid: 7d319db078cb846de90182c3ae4e9233
   m_configObjects: {}

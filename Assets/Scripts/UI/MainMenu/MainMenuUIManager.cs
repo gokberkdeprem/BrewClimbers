@@ -24,7 +24,7 @@ namespace UI
         void Start()
         {
             _singlePlayer.onClick.AddListener(ToggleSelectGameMod);
-            // _multiPlayer.onClick.AddListener(delegate { LoadGameScenes(0); });
+            _multiPlayer.onClick.AddListener(delegate { LoadGameScenes(3); });
             _leaderBoard.onClick.AddListener(ToggleLeaderBoard);
             _settings.onClick.AddListener(ToggleSettings);
             _exit.onClick.AddListener(QuitApplication);
@@ -58,7 +58,7 @@ namespace UI
         private void ToggleSelectGameMod()
         {
             if(_gameModPanel.activeInHierarchy)
-                _settingsPanel.SetActive(false);
+                _gameModPanel.SetActive(false);
             else
                 _gameModPanel.SetActive(true);
         }
