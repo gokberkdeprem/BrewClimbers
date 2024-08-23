@@ -2433,7 +2433,7 @@ MonoBehaviour:
   _ropeSwingStartButton: {fileID: 302318792}
   _closeButton: {fileID: 1622283437}
   _hiddenCloseButton: {fileID: 1543978657}
-  _gameModsObject: {fileID: 0}
+  _gameModsObject: {fileID: 441245896}
 --- !u!1 &1407076497
 GameObject:
   m_ObjectHideFlags: 0

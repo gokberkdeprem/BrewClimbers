@@ -6,9 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="3a6e647a-c07b-4b55-b194-7c87be71e7a0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BrewClimbers/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BrewClimbers/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/LeaderBoard/LeaderBoardMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/LeaderBoard/LeaderBoardMenu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainMenu/GameModsMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainMenu/GameModsMenu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainMenu/SettingsMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainMenu/SettingsMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/PolygonBattleRoyale_02_A.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Materials/PolygonBattleRoyale_02_A.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Scenes/Demo.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PolygonBattleRoyale/Scenes/Demo.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Characters/FemalePlayerRS.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Characters/FemalePlayerRS.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SinglePlayerRopeSwing.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SinglePlayerRopeSwing.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enums/GameModScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/GameModScene.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RopeSwing/PlayerControllerRS.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RopeSwing/PlayerControllerRS.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +37,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Selectable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/92f8bbba597a4c848e8aa06f7ebfe3ad175800/47/62451827/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/92f8bbba597a4c848e8aa06f7ebfe3ad175800/4e/b53f17a9/UnityAction.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/92f8bbba597a4c848e8aa06f7ebfe3ad175800/74/2d17ae27/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/92f8bbba597a4c848e8aa06f7ebfe3ad175800/c8/e93e151c/SetupCoroutine.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/92f8bbba597a4c848e8aa06f7ebfe3ad175800/d5/1dd0eb78/InvokableCall.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/92f8bbba597a4c848e8aa06f7ebfe3ad175800/fb/173221e4/UnityEvent.cs" root0="SKIP_HIGHLIGHTING" />
@@ -71,6 +78,14 @@
   }
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/BrewClimbersMacBUILD/0.1.3.app/Contents/MacOS/BrewClimbers" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BrewClimbersMacBUILD/0.1.3.app/Contents/MacOS" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/2022.3.23f1/Unity.app/Contents/MacOS/Unity" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;$PROJECT_DIR$&quot; -debugCodeOptimization" />
@@ -97,10 +112,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="5491">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="5491" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -138,6 +153,7 @@
       <workItem from="1722761876706" duration="8090000" />
       <workItem from="1723445694000" duration="16000" />
       <workItem from="1723445860032" duration="2831000" />
+      <workItem from="1724329141938" duration="3603000" />
     </task>
     <servers />
   </component>

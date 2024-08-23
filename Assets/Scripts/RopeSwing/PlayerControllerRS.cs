@@ -26,6 +26,7 @@ namespace RopeSwing
         
         [SerializeField] private float _ropeLengthMin = 3;
         [SerializeField] private float _ropeLengthMax = 3;
+        [SerializeField] private float _ropeLengthShorteningRate = 0.1f;
         private GameManager _gameManager;
     
         private bool isFilling;
@@ -148,7 +149,7 @@ namespace RopeSwing
 
                 if (CurrentRopeLength > 0)
                 {
-                    CurrentRopeLength -= 0.1f;
+                    CurrentRopeLength -= _ropeLengthShorteningRate;
                 }
                 
                 yield return new WaitForFixedUpdate();
