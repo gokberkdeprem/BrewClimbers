@@ -11,6 +11,7 @@ namespace RopeSwing
 {
     public class PlayerControllerRS : PlayerController
     {
+        [SerializeField] private PlayerControllerRS _script;
         [SerializeField] private Rigidbody _rightHandRb;
         [SerializeField] private Rigidbody _leftHandRb;
         [SerializeField] private SpringJoint _ropeEndSpringJoint;
@@ -40,6 +41,12 @@ namespace RopeSwing
         public UnityEvent _killCoRoutine;
         private Coroutine currentCoRoutine;
 
+        private void Awake()
+        {
+            if (SystemInfo.deviceType != DeviceType.Handheld)
+                _script.enabled = false;
+        }
+        
         public float CurrentRopeLength
         {
             get => _currentRopeLength;
@@ -165,10 +172,6 @@ namespace RopeSwing
 
         private void GameOver()
         {
-            foreach (var rb in rigidbodies)
-            {
-                rb.constraints = RigidbodyConstraints.FreezeAll;
-            }
         }
     }
 }

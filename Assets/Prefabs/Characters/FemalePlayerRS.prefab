@@ -1014,6 +1014,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4718356450853358}
   - component: {fileID: 7693552006600595539}
+  - component: {fileID: 7856545495611461863}
   m_Layer: 7
   m_Name: Root
   m_TagString: Untagged
@@ -1055,12 +1056,13 @@ MonoBehaviour:
   OnTouch:
     m_PersistentCalls:
       m_Calls: []
+  _script: {fileID: 7693552006600595539}
   _rightHandRb: {fileID: 970171992834754011}
   _leftHandRb: {fileID: 4639594259473537436}
   _ropeEndSpringJoint: {fileID: 0}
   _currentRopeLength: 0
   _hipsRb: {fileID: 4019768842412246632}
-  _force: 2000
+  _force: 3000
   _virtualCamera: {fileID: 0}
   _staminaLimit: 3
   playerControllerRS: {fileID: 7693552006600595539}
@@ -1068,6 +1070,43 @@ MonoBehaviour:
   _ropeEnd: {fileID: 1358778002898999244}
   _ropeLengthMin: 2
   _ropeLengthMax: 15
+  _ropeLengthShorteningRate: 0.3
+  TargetObject: {fileID: 0}
+  targetObjectColorController: {fileID: 0}
+  _killCoRoutine:
+    m_PersistentCalls:
+      m_Calls: []
+  rigidbodies: []
+--- !u!114 &7856545495611461863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328188200464704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db0cbb9cc49e5418bb52c9a0800dc9dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnTouch:
+    m_PersistentCalls:
+      m_Calls: []
+  _script: {fileID: 7856545495611461863}
+  _rightHandRb: {fileID: 970171992834754011}
+  _leftHandRb: {fileID: 4639594259473537436}
+  _ropeEndSpringJoint: {fileID: 0}
+  _currentRopeLength: 0
+  _hipsRb: {fileID: 4019768842412246632}
+  _force: 3000
+  _virtualCamera: {fileID: 0}
+  _staminaLimit: 3
+  playerControllerRS: {fileID: 7693552006600595539}
+  _ropeStart: {fileID: 7122683269611054214}
+  _ropeEnd: {fileID: 1358778002898999244}
+  _ropeLengthMin: 2
+  _ropeLengthMax: 15
+  _ropeLengthShorteningRate: 0.3
   TargetObject: {fileID: 0}
   targetObjectColorController: {fileID: 0}
   _killCoRoutine:

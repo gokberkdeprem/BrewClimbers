@@ -38,5 +38,23 @@ public class PlayerAnimationController : MonoBehaviour
                 }
             }
         }
+        
+        if (Input.GetMouseButtonDown(0) && !GameManager.Instance.IsGameOver)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            // Store information about what the ray hits
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                var colliderGameObject = hit.collider.gameObject;
+                
+                if (colliderGameObject.layer == LayerHelper.GetLayer(Layers.Button))
+                {
+                    _animator.enabled = false;
+                    _pac.enabled = false;
+                }
+            }
+        }
     }
 }
